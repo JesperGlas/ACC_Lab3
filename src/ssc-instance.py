@@ -9,8 +9,8 @@ from keystoneauth1 import loading
 from keystoneauth1 import session
 
 flavor = "scc.xsmall" 
-private_net = None
-floating_ip_pool_name = None
+private_net = "UPPMAX 2021/1-5 Internal IPv4 Network"
+floating_ip_pool_name = "Public External IPv4 Network"
 floating_ip = None
 image_name = "Ubuntu 18.04"
 

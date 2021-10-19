@@ -9,20 +9,6 @@ packages:
  - rabbitmq-server
 byobu_default: system 
 
-write_files:
-  - path: /home/ubuntu/cowsay-app.py
-    content: |
-      from flask import Flask, jsonify
-      import subprocess
-      import sys
-      app = Flask(__name__)
-      @app.route('/cowsay/api/v1.0/saysomething', methods=['GET'])
-      def cow_say():
-          data=subprocess.check_output(["cowsay","Hello student"])
-          return data
-      if __name__ == '__main__':
-          app.run(host='0.0.0.0',debug=True)
-
 runcmd:
  - git clone https://github.com/JesperGlas/ACC_Lab3.git
  - cd ACC_Lab3
