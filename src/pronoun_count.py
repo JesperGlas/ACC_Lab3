@@ -5,7 +5,7 @@ from os import listdir
 from os.path import isfile, join
 
 # Main function that counts the occurences of specified pronouns from json files of tweets
-def pronoun_count(directory_path: str) -> Dict:
+def analyze(directory_path: str) -> Dict:
 
     # A dictonary with the relevant pronounces and their occurences
     result: Dict = {
@@ -24,21 +24,21 @@ def pronoun_count(directory_path: str) -> Dict:
     # The program handles one file at a time and updates the result dictonary after each file
     for file_src in files:
         # Parses the jsons from the file
-        tweets = parse_json(file_src)
+        tweets = parse_json(f'{directory_path}/{file_src}')
         # Returns a dictonary of relevant word occurances from the current file
         file_result = count_relevant_words(tweets, result)
         # Updates the total result with the result of the file
         result.update(file_result)
 
-    return result
+    return json.dumps(result)
 
 # Function to parse the json file and return a list of parsed tweets
 def parse_json(file_src: str) -> List:
     # Initialize a list for all the parsed tweets
     tweets = list()
-
+    
     # Parse the json file
-    with open('test', 'r') as f:
+    with open(file_src, 'r') as f:
         for line in f:
             if not line.strip():
                 continue
@@ -68,4 +68,4 @@ def parse_text(sentance: str) -> List:
     return re.findall(r'\w+', sentance)
 
 if __name__ == '__main__':
-    pronoun_count('../rsrc/data')
+    analyze('data')

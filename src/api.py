@@ -1,21 +1,17 @@
 from flask import Flask
 from flask_restful import Resource, Api
 from tasks import add as task_add
+from tasks import pronoun_counter as task_counter
 
 app = Flask(__name__)
 api = Api(app)
 
-class HelloWorld(Resource):
+class Count(Resource):
     def get(self):
-        return {'hello': 'world'}
+        result = task_counter('data')
+        return result
 
-class AddNumbers(Resource):
-    def get(self):
-        result = task_add.delay(4, 4)
-        return result.get()
-
-api.add_resource(HelloWorld, '/')
-api.add_resource(AddNumbers, '/add')
+api.add_resource(Count, '/')
 
 if __name__ == '__main__':
     app.run(debug=True)
